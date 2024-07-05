@@ -11,6 +11,9 @@ import { Artist } from './artists/artist.entity';
 import { User } from './users/user.entity';
 import { Playlist } from './playlists/playlist.entity';
 import { PlayListModule } from './playlists/playlist.module';
+import { AuthModule } from './auth/auth.module';
+import { UserService } from './user/user.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -26,9 +29,11 @@ import { PlayListModule } from './playlists/playlist.module';
     }),
     SongsModule,
     PlayListModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UserService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
