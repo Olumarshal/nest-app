@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsArray, IsDateString, IsOptional, IsString, } from "class-validator";
+import { IsArray, IsDateString, IsNumber, IsOptional, IsString, } from "class-validator";
 
 export class UpdateSongDto {
     @IsString()
@@ -8,7 +8,7 @@ export class UpdateSongDto {
 
     @IsOptional()
     @IsArray()
-    @IsString({ each: true })
+    @IsNumber({}, { each: true })
     readonly artists;
 
     @IsDateString()

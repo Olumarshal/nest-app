@@ -20,14 +20,15 @@ export class SongsService {
     async create(songDTO: CreateSongDTO): Promise<Song> {
         const song = new Song();
         song.title = songDTO.title;
+        song.artists = songDTO.artists;
         song.duration = songDTO.duration;
         song.lyrics = songDTO.lyrics;
         song.releaseDate = songDTO.releaseDate;
 
-        // Fetch the artist entities from the database
-        song.artists = await Promise.all(
-            songDTO.artists.map(artistId => this.artistsRepository.findOneOrFail({ where: { id: artistId } }))
-        );
+        // Fetch all the artists based on the ids
+        const artists = await this.artistsRepository.findByIds(songDTO.artists);
+        // set the relation b/w artist and song
+        song.artists = artists
 
         return await this.songsRepository.save(song);
     }

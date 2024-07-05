@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ArrayNotEmpty, IsArray, IsDateString, IsMilitaryTime, IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsDateString, IsMilitaryTime, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateSongDTO {
     @IsString()
@@ -8,9 +8,8 @@ export class CreateSongDTO {
 
     @IsNotEmpty()
     @IsArray()
-    @ArrayNotEmpty()
-    @IsString({ each: true })
-    readonly artists: string[];
+    @IsNumber({}, { each: true })
+    readonly artists;
 
     @IsNotEmpty()
     @IsDateString()
