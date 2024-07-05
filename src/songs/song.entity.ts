@@ -21,7 +21,7 @@ export class Song {
     releaseDate: Date;
 
     @Column('time')
-    duration: Date;
+    duration: string;
 
     @Column('text')
     lyrics: string;
@@ -31,5 +31,5 @@ export class Song {
     artists: Artist[];
 
     @ManyToMany(() => Playlist, (playList) => playList.songs)
-    playList: Playlist;
+    playList: Playlist[];
 }

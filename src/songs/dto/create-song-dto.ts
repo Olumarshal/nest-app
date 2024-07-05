@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { ArrayNotEmpty, IsArray, IsDateString, IsMilitaryTime, IsNotEmpty, IsString } from "class-validator";
 
-
 export class CreateSongDTO {
     @IsString()
     @IsNotEmpty()
@@ -10,7 +9,7 @@ export class CreateSongDTO {
     @IsNotEmpty()
     @IsArray()
     @ArrayNotEmpty()
-    @IsString({ each: true})
+    @IsString({ each: true })
     readonly artists: string[];
 
     @IsNotEmpty()
@@ -20,4 +19,8 @@ export class CreateSongDTO {
     @IsMilitaryTime()
     @IsNotEmpty()
     readonly duration: string;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly lyrics: string;
 }
