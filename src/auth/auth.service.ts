@@ -3,13 +3,15 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcryptjs'
 import { LoginDTO } from './dto/login.dto';
-import { User } from 'src/users/users.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private userService: UsersService) {}
+    constructor(private userService: UsersService,
+    private jwtService: JwtService,
+ ) {}
 
-    async login(loginDTO: LoginDTO): Promise<User> {
+    async login(loginDTO: LoginDTO): Promise<{ accessToken: string }> {
         const user = await this.userService.findOne(loginDTO);
         const passwordMatched = await bcrypt.compare(
             loginDTO.password,
@@ -18,7 +20,11 @@ export class AuthService {
 
         if (passwordMatched) {
             delete user.password;
-            return user;
+            const payload = { email: user.email, sub: user.id };
+
+            return {
+                accessToken: this.jwtService.sign(payload)
+            };
         } else {
             throw new UnauthorizedException('Password does not match');
         }
