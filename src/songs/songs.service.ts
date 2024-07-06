@@ -38,7 +38,10 @@ export class SongsService {
     }
 
     async findOne(id: number): Promise<Song> {
-        const song = await this.songsRepository.findOne(id, { relations: ['artists'] });
+        const song = await this.songsRepository.findOne({
+            where: { id },
+            relations: ['artists'],
+          });
         if (!song) {
             throw new NotFoundException(`Song with ID ${id} not found`);
         }

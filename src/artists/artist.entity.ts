@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Entity, PrimaryGeneratedColumn, ManyToMany, JoinColumn, OneToOne } from 'typeorm';
 import { Song } from '../songs/song.entity';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/users/users.entity';
 
 @Entity('artists')
 export class Artist {

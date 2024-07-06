@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Song } from '../songs/song.entity';
-import { User } from '../users/user.entity';
+import { User } from '../users/users.entity';
 import {
     Column,
     Entity,
